@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<learn-spring>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.yamdeng.learn.spring.Application",
+      "projectName": "learn-spring",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
