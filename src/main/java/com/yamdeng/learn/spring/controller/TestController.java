@@ -9,7 +9,7 @@ public class TestController {
 
     @GetMapping("/api/test")
     public String getMethodName() {
-        return "yamdeng";
+        return "yamdeng33";
     }
 
 }

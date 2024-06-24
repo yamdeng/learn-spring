@@ -1,0 +1,30 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Application",
+      "request": "launch",
+      "mainClass": "com.yamdeng.learn.spring.Application"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<learn-spring>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.yamdeng.learn.spring.Application",
+      "projectName": "learn-spring",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-Application<spring>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.yamdeng.learn.spring.Application",
+      "projectName": "spring",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

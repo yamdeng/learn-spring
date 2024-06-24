@@ -1,0 +1,32 @@
+{
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "notebook.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.format.enable": true,
+  "editor.formatOnSave": true,
+  "search.exclude": {
+    ".history/**": true,
+    "**/.history": true
+  },
+  "security.promptForLocalFileProtocolHandling": false,
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-21",
+      "path": "c:\\Tool\\zulu-21",
+      "default": true
+    }
+  ],
+  "java.debug.settings.hotCodeReplace": "auto",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.showBuildStatusOnStart.enabled": "notification",
+  "java.gradle.buildServer.enabled": "off",
+  "java.compile.nullAnalysis.mode": "automatic"
+}
+
+{
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.jdt.ls.java.home": "c:\\Tool\\zulu-21",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.hotCodeReplace": "auto"
+}
