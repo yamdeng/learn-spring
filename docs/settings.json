@@ -1,3 +1,10 @@
 {
-  "java.compile.nullAnalysis.mode": "automatic"
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.jdt.ls.java.home": "c:\\Tool\\zulu-21",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.hotCodeReplace": "auto"
 }

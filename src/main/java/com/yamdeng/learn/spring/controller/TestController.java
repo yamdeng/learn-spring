@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yamdeng.learn.spring.dto.UserDTO;
 
-
 @RestController
 public class TestController {
 
@@ -16,9 +15,9 @@ public class TestController {
 
     @GetMapping("/api/test-user")
     public UserDTO getTestUser() {
-        UserDTO user = new UserDTO();
-        user.setName("yamdeng");
-        user.setAddress("incheon");
+        UserDTO user = UserDTO.builder()
+                .name("yamdeng")
+                .address("incheon").build();
         return user;
     }
 
