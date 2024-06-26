@@ -1,12 +1,15 @@
 package com.yamdeng.learn.spring.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.yamdeng.learn.spring.domain.Member;
+import com.yamdeng.learn.spring.dto.RequestList;
+import com.yamdeng.learn.spring.dto.SearchDTO;
 import com.yamdeng.learn.spring.dto.UserDTO;
-import java.util.List;
 
 @Mapper
 public interface UserMapper {
@@ -17,5 +20,9 @@ public interface UserMapper {
     List<UserDTO> selectUserList();
 
     UserDTO getUserByLoginId(String loginId);
+
+    List<UserDTO> testList(RequestList<?> requestList);
+
+    int testListTotalCount(SearchDTO searchDTO);
 
 }

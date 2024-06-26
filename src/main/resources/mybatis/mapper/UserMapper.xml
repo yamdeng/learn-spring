@@ -18,6 +18,28 @@
 		SELECT *
 		FROM   APP_USER
 		WHERE  1 = 1
+		and login_id = #{loginId}		
+	</select>
+
+
+	<!-- testList -->
+	<select id="testList"
+			parameterType="com.yamdeng.learn.spring.dto.RequestList"
+			resultType="com.yamdeng.learn.spring.dto.UserDTO">
+		SELECT *
+		FROM   APP_USER
+		WHERE  1 = 1
+		and login_id = #{data.loginId}
+		offset #{pageable.offset} limit #{pageable.pageSize}
+	</select>
+
+	<!-- testListTotalCount -->
+	<select id="testListTotalCount"
+			parameterType="com.yamdeng.learn.spring.dto.SearchDTO"
+			resultType="int">
+		SELECT count(*) totalCount
+		FROM   APP_USER
+		WHERE  1 = 1
 		and login_id = #{loginId}
 	</select>
 
