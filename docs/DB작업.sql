@@ -18,7 +18,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -57,7 +57,7 @@ SELECT a.column_name
 	,CASE WHEN a.data_type in('character', 'character varying') THEN 'String'
 			WHEN a.data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN a.data_type in('numeric') THEN 'Double'
-			WHEN a.data_type in('integer') THEN 'Integer'
+			WHEN a.data_type in('integer') THEN 'Long'
 			WHEN a.data_type in('boolean') THEN 'Boolean'
 			WHEN a.data_type in('date') THEN 'LocalDate'
             ELSE
@@ -88,7 +88,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -102,7 +102,7 @@ order by ordinal_position) As foo;
 select CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -119,7 +119,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -143,7 +143,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -161,7 +161,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -174,7 +174,7 @@ order by ordinal_position) As foo;
 -- insert if null check : 하단 부분 : "를 치환 후에 다시 .equals()를 .equals("")로 치환
 select concat('<if test=', '''', camel_case, ' != null and !', camel_case, '.equals("")', '''', '>',
 			  chr(10),
-			  ',', '#{', camel_case, '}',
+			  '  ,', '#{', camel_case, '}',
 			  chr(10),
 			 '</if>') as mybatis_text
 from (
@@ -185,7 +185,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -198,7 +198,7 @@ order by ordinal_position) As foo ) as camel_foo;
 -- insert if null check : 상단 부분 : "를 치환 후에 다시 .equals()를 .equals("")로 치환
 select concat('<if test=', '''', camel_case, ' != null and !', camel_case, '.equals("")', '''', '>',
 			  chr(10),
-			  ',', column_name,
+			  '  ,', column_name,
 			  chr(10),
 			 '</if>') as mybatis_text
 from (
@@ -209,7 +209,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE
@@ -222,7 +222,7 @@ order by ordinal_position) As foo ) as camel_foo;
 -- update if null check : 상단 부분 : "를 치환 후에 다시 .equals()를 .equals("")로 치환
 select concat('<if test=', '''', camel_case, ' != null and !', camel_case, '.equals("")', '''', '>',
 			  chr(10),
-			  ',', column_name, ' = ', '#{', camel_case, '}',
+			  '  ,', column_name, ' = ', '#{', camel_case, '}',
 			  chr(10),
 			 '</if>') as mybatis_text
 from (
@@ -233,7 +233,7 @@ SELECT column_name
 	,CASE WHEN data_type in('character', 'character varying') THEN 'String'
 			WHEN data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
 			WHEN data_type in('numeric') THEN 'Double'
-			WHEN data_type in('integer') THEN 'Integer'
+			WHEN data_type in('integer') THEN 'Long'
 			WHEN data_type in('boolean') THEN 'Boolean'
 			WHEN data_type in('date') THEN 'LocalDate'
             ELSE

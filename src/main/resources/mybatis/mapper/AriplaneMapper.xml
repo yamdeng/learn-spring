@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yamdeng.learn.spring.mapper.AirplaneMapper">
+
+	<!-- list -->
+	<select id="selectAirplaneList"
+			resultType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
+		SELECT id AS id /* ID */
+                ,create_user_id AS create_user_id /* 등록자 ID */
+                ,update_user_id AS update_user_id /* 수정자 ID */
+                ,create_date AS create_date /* 등록일 */
+                ,update_date AS update_date /* 수정일 */
+                ,is_delete AS is_delete /* 삭제 여부 */
+                ,name AS name /* 비행기이름 */
+                ,name_en AS name_en /* 비행기영문명 */
+                ,air_code AS air_code /* 비행기코드 */
+                ,country_code AS country_code /* 국가코드 */
+                ,last_pain_date AS last_pain_date /* 최종비행시간 */
+                ,last_fix_date AS last_fix_date /* 최종수리시간 */
+                ,size AS size /* 크기 */
+		FROM
+			APP_AIRPLANE
+		WHERE 1=1
+	</select>
+
+	<!-- getDetail -->
+	<select id="getAirplaneById"
+			parameterType="java.lang.Long"
+			resultType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
+		SELECT *
+		FROM   APP_AIRPLANE
+		WHERE  1 = 1
+		and id = #{id}		
+	</select>
+
+	<!-- insert -->
+	<insert id="insertAriplane"
+			parameterType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
+		
+        INSERT INTO APP_AIRPLANE (
+            <if test='createUserId != null and !createUserId.equals("")'>
+              create_user_id
+            </if>
+            <if test='updateUserId != null and !updateUserId.equals("")'>
+              ,update_user_id
+            </if>
+            <if test='createDate != null and !createDate.equals("")'>
+              ,create_date
+            </if>
+            <if test='updateDate != null and !updateDate.equals("")'>
+              ,update_date
+            </if>
+            <if test='isDelete != null and !isDelete.equals("")'>
+              ,is_delete
+            </if>
+            <if test='name != null and !name.equals("")'>
+              ,name
+            </if>
+            <if test='nameEn != null and !nameEn.equals("")'>
+              ,name_en
+            </if>
+            <if test='airCode != null and !airCode.equals("")'>
+              ,air_code
+            </if>
+            <if test='countryCode != null and !countryCode.equals("")'>
+              ,country_code
+            </if>
+            <if test='lastPainDate != null and !lastPainDate.equals("")'>
+              ,last_pain_date
+            </if>
+            <if test='lastFixDate != null and !lastFixDate.equals("")'>
+              ,last_fix_date
+            </if>
+            <if test='size != null and !size.equals("")'>
+              ,size
+            </if>
+        ) VALUES (
+            <if test='createUserId != null and !createUserId.equals("")'>
+              #{createUserId}
+            </if>
+            <if test='updateUserId != null and !updateUserId.equals("")'>
+              ,#{updateUserId}
+            </if>
+            <if test='createDate != null and !createDate.equals("")'>
+              ,#{createDate}
+            </if>
+            <if test='updateDate != null and !updateDate.equals("")'>
+              ,#{updateDate}
+            </if>
+            <if test='isDelete != null and !isDelete.equals("")'>
+              ,#{isDelete}
+            </if>
+            <if test='name != null and !name.equals("")'>
+              ,#{name}
+            </if>
+            <if test='nameEn != null and !nameEn.equals("")'>
+              ,#{nameEn}
+            </if>
+            <if test='airCode != null and !airCode.equals("")'>
+              ,#{airCode}
+            </if>
+            <if test='countryCode != null and !countryCode.equals("")'>
+              ,#{countryCode}
+            </if>
+            <if test='lastPainDate != null and !lastPainDate.equals("")'>
+              ,#{lastPainDate}
+            </if>
+            <if test='lastFixDate != null and !lastFixDate.equals("")'>
+              ,#{lastFixDate}
+            </if>
+            <if test='size != null and !size.equals("")'>
+              ,#{size}
+            </if>
+        )
+	</insert>
+
+    <!-- update -->
+    <update id="updateAriplane"
+			parameterType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
+		UPDATE APP_AIRPLANE
+		SET
+			<if test='createDate != null and !createDate.equals("")'>
+              create_date = #{createDate}
+            </if>
+            <if test='updateDate != null and !updateDate.equals("")'>
+              ,update_date = #{updateDate}
+            </if>
+            <if test='isDelete != null and !isDelete.equals("")'>
+              ,is_delete = #{isDelete}
+            </if>
+            <if test='name != null and !name.equals("")'>
+              ,name = #{name}
+            </if>
+            <if test='nameEn != null and !nameEn.equals("")'>
+              ,name_en = #{nameEn}
+            </if>
+            <if test='airCode != null and !airCode.equals("")'>
+              ,air_code = #{airCode}
+            </if>
+            <if test='countryCode != null and !countryCode.equals("")'>
+              ,country_code = #{countryCode}
+            </if>
+            <if test='lastPainDate != null and !lastPainDate.equals("")'>
+              ,last_pain_date = #{lastPainDate}
+            </if>
+            <if test='lastFixDate != null and !lastFixDate.equals("")'>
+              ,last_fix_date = #{lastFixDate}
+            </if>
+            <if test='size != null and !size.equals("")'>
+              ,size = #{size}
+            </if>
+		WHERE id = #{id}
+	</update>
+
+    <!-- delete -->
+    <delete id="deleteAirplaneById"
+			parameterType="java.lang.Long">
+		DELETE FROM APP_AIRPLANE
+		WHERE  id = #{id}		
+	</delete>
+
+</mapper>
+
+
+
+
+
