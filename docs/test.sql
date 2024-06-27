@@ -5,3 +5,28 @@ insert into APP_USER(login_id, name, email) values('yamdeng5', '안용성5', 'ya
 insert into APP_USER(login_id, name, email) values('yamdeng6', '안용성6', 'yamdeng6@gmail.com');
 insert into APP_USER(login_id, name, email) values('yamdeng7', '안용성7', 'yamdeng7@gmail.com');
 insert into APP_USER(login_id, name, email) values('yamdeng8', '안용성8', 'yamdeng8@gmail.com');
+
+
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기1', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기2', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기3', 'KOREAN_AIR_CD2', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기4', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기5', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기6', 'KOREAN_AIR_CD3', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기7', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기8', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기9', 'KOREAN_AIR_CD2', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기10', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기11', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기12', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기13', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기14', 'KOREAN_AIR_CD2', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기15', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기16', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기17', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기18', 'KOREAN_AIR_CD3', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기19', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기20', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기21', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기22', 'KOREAN_AIR_CD1', NOW(), NOW());
+insert into APP_AIRPLANE(NAME, AIR_CODE, CREATE_DATE, UPDATE_DATE) values('비행기23', 'KOREAN_AIR_CD3', NOW(), NOW());
