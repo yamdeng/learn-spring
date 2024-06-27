@@ -32,6 +32,16 @@ public class MemberController {
         return userMapper.findByEmail("yamdeng@gmail.com");
     }
 
+    @GetMapping("/users-direct")
+    public List<UserDTO> selectUserListDirect() {
+        return userMapper.selectUserList();
+    }
+
+    @GetMapping("/api/v1/users")
+    public List<UserDTO> selectUserListV1() {
+        return userMapper.selectUserList();
+    }
+
     @GetMapping("/api/users")
     public List<UserDTO> selectUserList() {
         return userMapper.selectUserList();
