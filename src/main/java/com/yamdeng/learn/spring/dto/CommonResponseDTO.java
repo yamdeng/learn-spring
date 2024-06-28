@@ -15,9 +15,11 @@ public class CommonResponseDTO<T> {
     private List<T> list = Collections.emptyList();
 
     private int totalCount;
-    private T detailInfo;
+    private T data;
 
     @Builder.Default
     private boolean success = true;
+
+    private String errorMessage;
 
 }
