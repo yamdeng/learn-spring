@@ -13,9 +13,9 @@ public interface AirplaneMapper {
 
     AirplaneDTO getAirplaneById(long id);
 
-    void insertAriplane(AirplaneDTO airplaneDTO);
+    void insertAirplane(AirplaneDTO airplaneDTO);
 
-    void updateAriplane(AirplaneDTO airplaneDTO);
+    void updateAirplane(AirplaneDTO airplaneDTO);
 
     void deleteAirplaneById(long id);
 

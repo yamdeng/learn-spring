@@ -11,7 +11,7 @@ public class ApiConstant {
 
     public static final String USER_API_PREFIX = API_VERSION_PREFIX + "/users";
     public static final String DEPT_API_PREFIX = API_VERSION_PREFIX + "/depts";
-    public static final String ARIPLANE_API_PREFIX = API_VERSION_PREFIX + "/airplanes";
+    public static final String AIRPLANE_API_PREFIX = API_VERSION_PREFIX + "/airplanes";
     public static final String FLIGHT_API_PREFIX = API_VERSION_PREFIX + "/flights";
     public static final String CODE_GROUP_API_PREFIX = API_VERSION_PREFIX + "/codegroups";
     public static final String CODE_API_PREFIX = API_VERSION_PREFIX + "/codes";

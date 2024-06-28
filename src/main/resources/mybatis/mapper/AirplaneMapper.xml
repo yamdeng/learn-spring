@@ -34,7 +34,7 @@
 	</select>
 
 	<!-- insert -->
-	<insert id="insertAriplane"
+	<insert id="insertAirplane"
 			parameterType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
 		
         INSERT INTO APP_AIRPLANE (
@@ -115,7 +115,7 @@
 	</insert>
 
     <!-- update -->
-    <update id="updateAriplane"
+    <update id="updateAirplane"
 			parameterType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
 		UPDATE APP_AIRPLANE
 		SET

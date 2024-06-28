@@ -16,7 +16,7 @@ import com.yamdeng.learn.spring.constant.ApiConstant;
 import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
 import com.yamdeng.learn.spring.service.AirplaneService;
 
-@RequestMapping(ApiConstant.ARIPLANE_API_PREFIX)
+@RequestMapping(ApiConstant.AIRPLANE_API_PREFIX)
 @RestController
 public class AirplaneController {
 
@@ -35,13 +35,13 @@ public class AirplaneController {
 
     @PostMapping("")
     public void create(@RequestBody AirplaneDTO airplaneDTO) {
-        airplaneService.insertAriplane(airplaneDTO);
+        airplaneService.insertAirplane(airplaneDTO);
     }
 
     @PutMapping("{id}")
     public void update(@PathVariable Long id, @RequestBody AirplaneDTO airplaneDTO) {
         airplaneDTO.setId(id);
-        airplaneService.updateAriplane(airplaneDTO);
+        airplaneService.updateAirplane(airplaneDTO);
     }
 
     @DeleteMapping("{id}")

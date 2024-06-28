@@ -22,12 +22,12 @@ public class AirplaneService {
         return airplaneMapper.getAirplaneById(id);
     }
 
-    public void insertAriplane(AirplaneDTO airplaneDTO) {
-        airplaneMapper.insertAriplane(airplaneDTO);
+    public void insertAirplane(AirplaneDTO airplaneDTO) {
+        airplaneMapper.insertAirplane(airplaneDTO);
     }
 
-    public void updateAriplane(AirplaneDTO airplaneDTO) {
-        airplaneMapper.updateAriplane(airplaneDTO);
+    public void updateAirplane(AirplaneDTO airplaneDTO) {
+        airplaneMapper.updateAirplane(airplaneDTO);
     }
 
     public void deleteAirplaneById(long id) {
