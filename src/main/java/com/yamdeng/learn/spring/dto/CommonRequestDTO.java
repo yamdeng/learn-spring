@@ -1,6 +1,7 @@
 package com.yamdeng.learn.spring.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -9,10 +10,12 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-abstract public class CommonRequestDTO {
+public class CommonRequestDTO {
 
-    private int pageSize;
-    private int currentPage;
+    @Builder.Default
+    private int pageSize = 10;
+    @Builder.Default
+    private int currentPage = 1;
     private String sortName;
     private String sortDirection;
 

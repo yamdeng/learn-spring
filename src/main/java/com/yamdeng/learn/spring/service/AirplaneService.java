@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yamdeng.learn.spring.dto.request.AirplaneRequestDTO;
 import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
 import com.yamdeng.learn.spring.mapper.AirplaneMapper;
 
@@ -16,6 +17,10 @@ public class AirplaneService {
 
     public List<AirplaneDTO> selectAirplaneList() {
         return airplaneMapper.selectAirplaneList();
+    }
+
+    public List<AirplaneDTO> selectAirplaneListPage(AirplaneRequestDTO airplaneRequestDTO) {
+        return airplaneMapper.selectAirplaneListPage(airplaneRequestDTO);
     }
 
     public AirplaneDTO getAirplaneById(Long id) {

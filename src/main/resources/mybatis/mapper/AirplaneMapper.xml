@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yamdeng.learn.spring.mapper.AirplaneMapper">
 
+  <!-- list -->
+	<select id="selectAirplaneListPage"
+      parameterType="com.yamdeng.learn.spring.dto"
+			resultType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
+		SELECT id AS id /* ID */
+                ,create_user_id AS create_user_id /* 등록자 ID */
+                ,update_user_id AS update_user_id /* 수정자 ID */
+                ,create_date AS create_date /* 등록일 */
+                ,update_date AS update_date /* 수정일 */
+                ,is_delete AS is_delete /* 삭제 여부 */
+                ,name AS name /* 비행기이름 */
+                ,name_en AS name_en /* 비행기영문명 */
+                ,air_code AS air_code /* 비행기코드 */
+                ,country_code AS country_code /* 국가코드 */
+                ,last_pain_date AS last_pain_date /* 최종비행시간 */
+                ,last_fix_date AS last_fix_date /* 최종수리시간 */
+                ,size AS size /* 크기 */
+		FROM
+			APP_AIRPLANE
+		WHERE 1=1
+	</select>
+
 	<!-- list -->
 	<select id="selectAirplaneList"
 			resultType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">

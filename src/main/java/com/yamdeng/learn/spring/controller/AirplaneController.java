@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yamdeng.learn.spring.constant.ApiConstant;
+import com.yamdeng.learn.spring.dto.request.AirplaneRequestDTO;
 import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
 import com.yamdeng.learn.spring.service.AirplaneService;
 
@@ -24,8 +25,8 @@ public class AirplaneController {
     private AirplaneService airplaneService;
 
     @GetMapping("")
-    public List<AirplaneDTO> selectList() {
-        return airplaneService.selectAirplaneList();
+    public List<AirplaneDTO> selectList(AirplaneRequestDTO airplaneRequestDTO) {
+        return airplaneService.selectAirplaneListPage(airplaneRequestDTO);
     }
 
     @GetMapping("{id}")
