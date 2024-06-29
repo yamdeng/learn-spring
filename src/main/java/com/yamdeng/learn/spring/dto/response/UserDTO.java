@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import com.yamdeng.learn.spring.dto.BaseDTO;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
 
 @Data
 @SuperBuilder
@@ -17,6 +19,16 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class UserDTO extends BaseDTO {
+
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    @Builder
+    private static class AddressInfo {
+        private String address; /* 주소 */
+        private String addressDetail; /* 주소상세 */
+        private String zipCode; /* 우편변호 */
+    }
 
     private String loginId; /* 로그인ID */
     private String name; /* 이름 */
@@ -33,5 +45,16 @@ public class UserDTO extends BaseDTO {
     private String zipCode; /* 우편변호 */
     private LocalDate joinDate; /* 입사일 */
     private String status; /* 사용자상태 */
+    private AddressInfo addressInfo;
+
+    @Override
+    public UserDTO mappingAssociation() {
+        this.addressInfo = AddressInfo.builder()
+                            .address(address)
+                            .addressDetail(addressDetail)
+                            .zipCode(zipCode)
+                            .build();
+        return this;
+    }
 
 }

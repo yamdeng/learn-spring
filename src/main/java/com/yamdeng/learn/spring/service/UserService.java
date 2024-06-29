@@ -16,26 +16,34 @@ public class UserService {
     private UserMapper userMapper;
 
     public List<UserDTO> select(UserRequestDTO userRequestDTO) {
-        return userMapper.select(userRequestDTO);
+        List<UserDTO> list = userMapper.select(userRequestDTO);
+        list.stream().forEach(info -> {
+            info.mappingAssociation();
+        });
+        return list;
     }
 
     public int getTotalCount(UserRequestDTO userRequestDTO) {
         return userMapper.getTotalCount(userRequestDTO);
     }
 
-    public UserDTO getAirplaneById(Long id) {
-        return userMapper.getUserById(id);
+    public UserDTO getUserById(Long id) {
+        UserDTO detailInfo = userMapper.getUserById(id);
+        if(detailInfo != null) {
+            detailInfo.mappingAssociation();
+        }
+        return detailInfo;
     }
 
-    public int insertAirplane(UserDTO userDTO) {
+    public int insertUser(UserDTO userDTO) {
         return userMapper.insertUser(userDTO);
     }
 
-    public void updateAirplane(UserDTO userDTO) {
+    public void updateUser(UserDTO userDTO) {
         userMapper.updateUser(userDTO);
     }
 
-    public void deleteAirplaneById(long id) {
+    public void deleteUserById(long id) {
         userMapper.deleteUserById(id);
     }
 

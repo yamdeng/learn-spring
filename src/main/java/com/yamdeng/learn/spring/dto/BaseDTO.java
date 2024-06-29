@@ -20,4 +20,9 @@ public class BaseDTO {
     private LocalDateTime updateDate; /* 수정일 */
     private Boolean isDelete; /* 삭제 여부 */
 
+    // hook method : 관계 설정시에 사용
+    public BaseDTO mappingAssociation() {
+        return this;
+    }
+
 }

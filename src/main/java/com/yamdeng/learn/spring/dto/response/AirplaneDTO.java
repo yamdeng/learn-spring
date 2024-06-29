@@ -1,6 +1,7 @@
 package com.yamdeng.learn.spring.dto.response;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.yamdeng.learn.spring.dto.BaseDTO;
 
@@ -24,5 +25,6 @@ public class AirplaneDTO extends BaseDTO {
     private LocalDateTime lastPainDate; /* 최종비행시간 */
     private LocalDateTime lastFixDate; /* 최종수리시간 */
     private Double size; /* 크기 */
+    private List<FlightDTO> flightList; /* 항공편 정보 목록 */
 
 }

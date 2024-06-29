@@ -38,28 +38,28 @@ public class UserController {
     @GetMapping("{id}")
     public CommonResponseDTO<UserDTO> getDetail(@PathVariable("id") Long id) {
         return CommonResponseDTO.<UserDTO>builder()
-                            .data(userService.getAirplaneById(id))
+                            .data(userService.getUserById(id))
                             .build();
     }
 
     @PostMapping("")
     public CommonResponseDTO<UserDTO> create(@RequestBody UserDTO UserDTO) {
-        userService.insertAirplane(UserDTO);
-        UserDTO createdEntity = userService.getAirplaneById(UserDTO.getId());
+        userService.insertUser(UserDTO);
+        UserDTO createdEntity = userService.getUserById(UserDTO.getId());
         return CommonResponseDTO.<UserDTO>builder().data(createdEntity).build();
     }
 
     @PutMapping("{id}")
     public CommonResponseDTO<UserDTO> update(@PathVariable("id") Long id, @RequestBody UserDTO UserDTO) {
         UserDTO.setId(id);
-        userService.updateAirplane(UserDTO);
-        UserDTO updatedEntity = userService.getAirplaneById(id);
+        userService.updateUser(UserDTO);
+        UserDTO updatedEntity = userService.getUserById(id);
         return CommonResponseDTO.<UserDTO>builder().data(updatedEntity).build();
     }
 
     @DeleteMapping("{id}")
     public CommonResponseDTO<?> delete(@PathVariable Long id) {
-        userService.deleteAirplaneById(id);
+        userService.deleteUserById(id);
         return CommonResponseDTO.getDefaultResponse();
     }
 

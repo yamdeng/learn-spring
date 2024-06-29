@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yamdeng.learn.spring.dto.request.AirplaneRequestDTO;
+import com.yamdeng.learn.spring.dto.request.FlightRequestDTO;
 import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
+import com.yamdeng.learn.spring.dto.response.FlightDTO;
 import com.yamdeng.learn.spring.mapper.AirplaneMapper;
+import com.yamdeng.learn.spring.mapper.FlightMapper;
 
 @Service
 public class AirplaneService {
@@ -15,8 +18,21 @@ public class AirplaneService {
     @Autowired
     private AirplaneMapper airplaneMapper;
 
+    @Autowired
+    private FlightMapper flightMapper;
+
+
+    private List<FlightDTO> getFlightList() {
+        return flightMapper.select(FlightRequestDTO.builder().build());
+    }
+    
     public List<AirplaneDTO> select(AirplaneRequestDTO airplaneRequestDTO) {
-        return airplaneMapper.select(airplaneRequestDTO);
+        List<FlightDTO> flightList = getFlightList();
+        List<AirplaneDTO> list = airplaneMapper.select(airplaneRequestDTO);
+        list.stream().forEach(info -> {
+            info.setFlightList(flightList);
+        });
+        return list;
     }
 
     public int getTotalCount(AirplaneRequestDTO airplaneRequestDTO) {
@@ -24,7 +40,12 @@ public class AirplaneService {
     }
 
     public AirplaneDTO getAirplaneById(Long id) {
-        return airplaneMapper.getAirplaneById(id);
+        List<FlightDTO> flightList = getFlightList();
+        AirplaneDTO detailInfo = airplaneMapper.getAirplaneById(id);
+        if(detailInfo != null) {
+            detailInfo.setFlightList(flightList);
+        }
+        return detailInfo;
     }
 
     public int insertAirplane(AirplaneDTO airplaneDTO) {
