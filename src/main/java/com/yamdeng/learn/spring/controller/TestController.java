@@ -17,6 +17,9 @@ import com.yamdeng.learn.spring.dto.TestSearchDTO;
 import com.yamdeng.learn.spring.mapper.TestMapper;
 import com.yamdeng.learn.spring.service.TestService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 public class TestController {
 
@@ -28,6 +31,8 @@ public class TestController {
 
     @GetMapping("/api/test")
     public String test() {
+        String name = "yamdeng";
+        log.info("test call name : {}", name);
         return "yamdeng";
     }
 

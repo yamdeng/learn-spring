@@ -13,6 +13,9 @@ import com.yamdeng.learn.spring.dto.TestDTO;
 import com.yamdeng.learn.spring.dto.TestSearchDTO;
 import com.yamdeng.learn.spring.mapper.TestMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class TestService {
 
@@ -23,13 +26,11 @@ public class TestService {
         RequestList<?> requestList = RequestList.builder().data(searchDTO).pageable(pageable).build();
         List<TestDTO> content = testMapper.testList(requestList);
         int totalCount = testMapper.testListTotalCount(searchDTO);
-
-        System.out.println("sort : " + pageable.getSort());
         return new PageImpl<>(content, pageable, totalCount);
     }
 
     public void test() {
-        System.out.println("test");
+        log.info("test");
     }
 
 }
