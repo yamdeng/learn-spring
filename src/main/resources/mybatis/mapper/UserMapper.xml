@@ -2,45 +2,4 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yamdeng.learn.spring.mapper.UserMapper">
 
-	<!-- 사용자 list -->
-	<select id="selectUserList"
-			resultType="com.yamdeng.learn.spring.dto.UserDTO">
-		SELECT *
-		FROM
-			APP_USER
-		WHERE 1=1
-	</select>
-
-	<!-- 사용자 가져오기(로그인ID 기준)-->
-	<select id="getUserByLoginId"
-			parameterType="java.lang.String"
-			resultType="com.yamdeng.learn.spring.dto.UserDTO">
-		SELECT *
-		FROM   APP_USER
-		WHERE  1 = 1
-		and login_id = #{loginId}		
-	</select>
-
-
-	<!-- testList -->
-	<select id="testList"
-			parameterType="com.yamdeng.learn.spring.dto.RequestList"
-			resultType="com.yamdeng.learn.spring.dto.UserDTO">
-		SELECT *
-		FROM   APP_USER
-		WHERE  1 = 1
-		and login_id = #{data.loginId}
-		offset #{pageable.offset} limit #{pageable.pageSize}
-	</select>
-
-	<!-- testListTotalCount -->
-	<select id="testListTotalCount"
-			parameterType="com.yamdeng.learn.spring.dto.SearchDTO"
-			resultType="int">
-		SELECT count(*) totalCount
-		FROM   APP_USER
-		WHERE  1 = 1
-		and login_id = #{loginId}
-	</select>
-
 </mapper>

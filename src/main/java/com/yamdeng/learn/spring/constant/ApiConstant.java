@@ -7,8 +7,6 @@ public class ApiConstant {
 
     public static final String API_VERSION_PREFIX = "/api/v1";
 
-    // user, dept, airplane, flight, code-group, code, menu, message, reservation
-
     public static final String USER_API_PREFIX = API_VERSION_PREFIX + "/users";
     public static final String DEPT_API_PREFIX = API_VERSION_PREFIX + "/depts";
     public static final String AIRPLANE_API_PREFIX = API_VERSION_PREFIX + "/airplanes";

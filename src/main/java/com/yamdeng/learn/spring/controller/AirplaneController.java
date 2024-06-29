@@ -26,8 +26,8 @@ public class AirplaneController {
     private AirplaneService airplaneService;
 
     @GetMapping("")
-    public CommonResponseDTO<List<AirplaneDTO>> selectListPage(AirplaneRequestDTO airplaneRequestDTO) {
-        List<AirplaneDTO> list = airplaneService.selectAirplaneListPage(airplaneRequestDTO);
+    public CommonResponseDTO<List<AirplaneDTO>> select(AirplaneRequestDTO airplaneRequestDTO) {
+        List<AirplaneDTO> list = airplaneService.select(airplaneRequestDTO);
         int totalCount = airplaneService.getTotalCount(airplaneRequestDTO);
         return CommonResponseDTO.<List<AirplaneDTO>>builder()
                             .data(list)

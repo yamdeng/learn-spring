@@ -15,16 +15,12 @@ public class AirplaneService {
     @Autowired
     private AirplaneMapper airplaneMapper;
 
-    public List<AirplaneDTO> selectAirplaneListPage(AirplaneRequestDTO airplaneRequestDTO) {
+    public List<AirplaneDTO> select(AirplaneRequestDTO airplaneRequestDTO) {
         return airplaneMapper.selectAirplaneListPage(airplaneRequestDTO);
     }
 
     public int getTotalCount(AirplaneRequestDTO airplaneRequestDTO) {
         return airplaneMapper.getTotalCount(airplaneRequestDTO);
-    }
-
-    public List<AirplaneDTO> selectAirplaneList() {
-        return airplaneMapper.selectAirplaneList();
     }
 
     public AirplaneDTO getAirplaneById(Long id) {

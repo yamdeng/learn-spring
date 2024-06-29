@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class UserDTO {
+public class TestDTO {
 
     private Integer id; /* ID */
     private Integer createUserId; /* 등록자 ID */
