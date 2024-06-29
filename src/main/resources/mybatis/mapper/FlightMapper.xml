@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yamdeng.learn.spring.mapper.FlightMapper">
+
+  <sql id="select-field">
+		  id AS id /* ID */
+      ,create_user_id AS create_user_id /* 등록자 ID */
+      ,update_user_id AS update_user_id /* 수정자 ID */
+      ,create_date AS create_date /* 등록일 */
+      ,update_date AS update_date /* 수정일 */
+      ,is_delete AS is_delete /* 삭제 여부 */
+      ,name AS name /* 항공편이름 */
+      ,name_en AS name_en /* 항공편영문명 */
+	</sql>
+
+  <!-- select -->
+	<select id="select"
+      parameterType="com.yamdeng.learn.spring.dto.request.FlightRequestDTO"
+			resultType="com.yamdeng.learn.spring.dto.response.FlightDTO">
+		SELECT <include refid="select-field"/>
+		FROM
+			APP_FLIGHT
+		WHERE 1=1
+    <include refid="CommonMapper.common_page_bottom"/>
+	</select>
+
+  <!-- list:totalCount -->
+  <select id="getTotalCount"
+			parameterType="com.yamdeng.learn.spring.dto.request.FlightRequestDTO"
+			resultType="int">
+		SELECT count(*) totalCount
+		FROM   APP_FLIGHT
+		WHERE  1 = 1
+	</select>
+
+	<!-- getDetail -->
+	<select id="getFlightById"
+			parameterType="java.lang.Long"
+			resultType="com.yamdeng.learn.spring.dto.response.FlightDTO">
+		SELECT <include refid="select-field"/>
+		FROM   APP_FLIGHT
+		WHERE  1 = 1
+		and id = #{id}		
+	</select>
+
+	<!-- insert -->
+	<insert id="insertFlight"
+			parameterType="com.yamdeng.learn.spring.dto.response.FlightDTO"
+      keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+      INSERT INTO APP_FLIGHT (
+          name
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,create_user_id
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,update_user_id
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,create_date
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,update_date
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,is_delete
+          </if>
+          <if test='airplaneId != null and !airplaneId.equals("")'>
+            ,airplane_id
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,name_en
+          </if>
+          <if test='airCode != null and !airCode.equals("")'>
+            ,air_code
+          </if>
+          <if test='startIataCode != null and !startIataCode.equals("")'>
+            ,start_iata_code
+          </if>
+          <if test='endIataCode != null and !endIataCode.equals("")'>
+            ,end_iata_code
+          </if>
+          <if test='captainId != null and !captainId.equals("")'>
+            ,captain_id
+          </if>
+          <if test='startDate != null and !startDate.equals("")'>
+            ,start_date
+          </if>
+          <if test='endDate != null and !endDate.equals("")'>
+            ,end_date
+          </if>
+      ) VALUES (
+          #{name}
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,#{createUserId}
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,#{updateUserId}
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,#{createDate}
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,#{updateDate}
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,#{isDelete}
+          </if>
+          <if test='airplaneId != null and !airplaneId.equals("")'>
+            ,#{airplaneId}
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,#{nameEn}
+          </if>
+          <if test='airCode != null and !airCode.equals("")'>
+            ,#{airCode}
+          </if>
+          <if test='startIataCode != null and !startIataCode.equals("")'>
+            ,#{startIataCode}
+          </if>
+          <if test='endIataCode != null and !endIataCode.equals("")'>
+            ,#{endIataCode}
+          </if>
+          <if test='captainId != null and !captainId.equals("")'>
+            ,#{captainId}
+          </if>
+          <if test='startDate != null and !startDate.equals("")'>
+            ,#{startDate}
+          </if>
+          <if test='endDate != null and !endDate.equals("")'>
+            ,#{endDate}
+          </if>
+      )
+	</insert>
+
+  <!-- update -->
+  <update id="updateFlight"
+    parameterType="com.yamdeng.learn.spring.dto.response.FlightDTO">
+		UPDATE APP_FLIGHT
+		SET
+        update_date = <include refid="CommonMapper.current_date_function"/>
+        <if test='createUserId != null and !createUserId.equals("")'>
+          ,create_user_id = #{createUserId}
+        </if>
+        <if test='updateUserId != null and !updateUserId.equals("")'>
+          ,update_user_id = #{updateUserId}
+        </if>
+        <if test='createDate != null and !createDate.equals("")'>
+          ,create_date = #{createDate}
+        </if>
+        <if test='isDelete != null and !isDelete.equals("")'>
+          ,is_delete = #{isDelete}
+        </if>
+        <if test='airplaneId != null and !airplaneId.equals("")'>
+          ,airplane_id = #{airplaneId}
+        </if>
+        <if test='name != null and !name.equals("")'>
+          ,name = #{name}
+        </if>
+        <if test='nameEn != null and !nameEn.equals("")'>
+          ,name_en = #{nameEn}
+        </if>
+        <if test='airCode != null and !airCode.equals("")'>
+          ,air_code = #{airCode}
+        </if>
+        <if test='startIataCode != null and !startIataCode.equals("")'>
+          ,start_iata_code = #{startIataCode}
+        </if>
+        <if test='endIataCode != null and !endIataCode.equals("")'>
+          ,end_iata_code = #{endIataCode}
+        </if>
+        <if test='captainId != null and !captainId.equals("")'>
+          ,captain_id = #{captainId}
+        </if>
+        <if test='startDate != null and !startDate.equals("")'>
+          ,start_date = #{startDate}
+        </if>
+        <if test='endDate != null and !endDate.equals("")'>
+          ,end_date = #{endDate}
+        </if>
+		WHERE id = #{id}
+	</update>
+
+  <!-- delete -->
+  <delete id="deleteFlightById"
+			parameterType="java.lang.Long">
+		DELETE FROM APP_FLIGHT
+		WHERE  id = #{id}		
+	</delete>
+
+</mapper>

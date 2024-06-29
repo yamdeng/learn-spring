@@ -44,11 +44,6 @@ public class TestController {
         return testMapper.selectUserList();
     }
 
-    @GetMapping("/api/v1/users")
-    public List<TestDTO> selectUserListV1() {
-        return testMapper.selectUserList();
-    }
-
     @GetMapping("/api/users")
     public List<TestDTO> selectUserList() {
         return testMapper.selectUserList();

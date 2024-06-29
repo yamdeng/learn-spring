@@ -2,4 +2,255 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yamdeng.learn.spring.mapper.UserMapper">
 
+  <sql id="select-field">
+		  id AS id /* ID */
+      ,create_user_id AS create_user_id /* 등록자 ID */
+      ,update_user_id AS update_user_id /* 수정자 ID */
+      ,create_date AS create_date /* 등록일 */
+      ,update_date AS update_date /* 수정일 */
+      ,is_delete AS is_delete /* 삭제 여부 */
+      ,name AS name /* 이름 */
+      ,name_en AS name_en /* 이름영문명 */
+      ,sabun AS sabun /* 사번 */
+      ,dept_id AS dept_id /* 부서ID */
+      ,position_title AS position_title /* 사용자직책명 */
+      ,position_title_en AS position_title_en /* 사용자직책영문명 */
+      ,phone_number AS phone_number /* 핸드폰번호 */
+      ,company_tel AS company_tel /* 회사전화번호 */
+      ,email AS email /* 이메일 */
+      ,address AS address /* 주소 */
+      ,address_detail AS address_detail /* 주소상세 */
+      ,zip_code AS zip_code /* 우편변호 */
+      ,join_date AS join_date /* 입사일 */
+      ,status AS status /* 사용자상태 */
+	</sql>
+
+  <!-- select -->
+	<select id="select"
+      parameterType="com.yamdeng.learn.spring.dto.request.UserRequestDTO"
+			resultType="com.yamdeng.learn.spring.dto.response.UserDTO">
+		SELECT <include refid="select-field"/>
+		FROM
+			APP_USER
+		WHERE 1=1
+    <include refid="CommonMapper.common_page_bottom"/>
+	</select>
+
+  <!-- list:totalCount -->
+  <select id="getTotalCount"
+			parameterType="com.yamdeng.learn.spring.dto.request.UserRequestDTO"
+			resultType="int">
+		SELECT count(*) totalCount
+		FROM   APP_USER
+		WHERE  1 = 1
+	</select>
+
+	<!-- getDetail -->
+	<select id="getUserById"
+			parameterType="java.lang.Long"
+			resultType="com.yamdeng.learn.spring.dto.response.UserDTO">
+		SELECT <include refid="select-field"/>
+		FROM   APP_USER
+		WHERE  1 = 1
+		and id = #{id}		
+	</select>
+
+	<!-- insert -->
+	<insert id="insertUser"
+			parameterType="com.yamdeng.learn.spring.dto.response.UserDTO"
+      keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+      INSERT INTO APP_USER (
+          name
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,create_user_id
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,update_user_id
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,create_date
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,update_date
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,is_delete
+          </if>
+          <if test='loginId != null and !loginId.equals("")'>
+            ,login_id
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,name_en
+          </if>
+          <if test='sabun != null and !sabun.equals("")'>
+            ,sabun
+          </if>
+          <if test='deptId != null and !deptId.equals("")'>
+            ,dept_id
+          </if>
+          <if test='positionTitle != null and !positionTitle.equals("")'>
+            ,position_title
+          </if>
+          <if test='positionTitleEn != null and !positionTitleEn.equals("")'>
+            ,position_title_en
+          </if>
+          <if test='phoneNumber != null and !phoneNumber.equals("")'>
+            ,phone_number
+          </if>
+          <if test='companyTel != null and !companyTel.equals("")'>
+            ,company_tel
+          </if>
+          <if test='email != null and !email.equals("")'>
+            ,email
+          </if>
+          <if test='address != null and !address.equals("")'>
+            ,address
+          </if>
+          <if test='addressDetail != null and !addressDetail.equals("")'>
+            ,address_detail
+          </if>
+          <if test='zipCode != null and !zipCode.equals("")'>
+            ,zip_code
+          </if>
+          <if test='joinDate != null and !joinDate.equals("")'>
+            ,join_date
+          </if>
+          <if test='status != null and !status.equals("")'>
+            ,status
+          </if>
+      ) VALUES (
+          #{name}
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,#{createUserId}
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,#{updateUserId}
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,#{createDate}
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,#{updateDate}
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,#{isDelete}
+          </if>
+          <if test='loginId != null and !loginId.equals("")'>
+            ,#{loginId}
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,#{nameEn}
+          </if>
+          <if test='sabun != null and !sabun.equals("")'>
+            ,#{sabun}
+          </if>
+          <if test='deptId != null and !deptId.equals("")'>
+            ,#{deptId}
+          </if>
+          <if test='positionTitle != null and !positionTitle.equals("")'>
+            ,#{positionTitle}
+          </if>
+          <if test='positionTitleEn != null and !positionTitleEn.equals("")'>
+            ,#{positionTitleEn}
+          </if>
+          <if test='phoneNumber != null and !phoneNumber.equals("")'>
+            ,#{phoneNumber}
+          </if>
+          <if test='companyTel != null and !companyTel.equals("")'>
+            ,#{companyTel}
+          </if>
+          <if test='email != null and !email.equals("")'>
+            ,#{email}
+          </if>
+          <if test='address != null and !address.equals("")'>
+            ,#{address}
+          </if>
+          <if test='addressDetail != null and !addressDetail.equals("")'>
+            ,#{addressDetail}
+          </if>
+          <if test='zipCode != null and !zipCode.equals("")'>
+            ,#{zipCode}
+          </if>
+          <if test='joinDate != null and !joinDate.equals("")'>
+            ,#{joinDate}
+          </if>
+          <if test='status != null and !status.equals("")'>
+            ,#{status}
+          </if>
+      )
+	</insert>
+
+  <!-- update -->
+  <update id="updateUser"
+    parameterType="com.yamdeng.learn.spring.dto.response.UserDTO">
+		UPDATE APP_USER
+		SET
+        update_date = <include refid="CommonMapper.current_date_function"/>
+        <if test='createUserId != null and !createUserId.equals("")'>
+          ,create_user_id = #{createUserId}
+        </if>
+        <if test='updateUserId != null and !updateUserId.equals("")'>
+          ,update_user_id = #{updateUserId}
+        </if>
+        <if test='createDate != null and !createDate.equals("")'>
+          ,create_date = #{createDate}
+        </if>
+        <if test='isDelete != null and !isDelete.equals("")'>
+          ,is_delete = #{isDelete}
+        </if>
+        <if test='loginId != null and !loginId.equals("")'>
+          ,login_id = #{loginId}
+        </if>
+        <if test='name != null and !name.equals("")'>
+          ,name = #{name}
+        </if>
+        <if test='nameEn != null and !nameEn.equals("")'>
+          ,name_en = #{nameEn}
+        </if>
+        <if test='sabun != null and !sabun.equals("")'>
+          ,sabun = #{sabun}
+        </if>
+        <if test='deptId != null and !deptId.equals("")'>
+          ,dept_id = #{deptId}
+        </if>
+        <if test='positionTitle != null and !positionTitle.equals("")'>
+          ,position_title = #{positionTitle}
+        </if>
+        <if test='positionTitleEn != null and !positionTitleEn.equals("")'>
+          ,position_title_en = #{positionTitleEn}
+        </if>
+        <if test='phoneNumber != null and !phoneNumber.equals("")'>
+          ,phone_number = #{phoneNumber}
+        </if>
+        <if test='companyTel != null and !companyTel.equals("")'>
+          ,company_tel = #{companyTel}
+        </if>
+        <if test='email != null and !email.equals("")'>
+          ,email = #{email}
+        </if>
+        <if test='address != null and !address.equals("")'>
+          ,address = #{address}
+        </if>
+        <if test='addressDetail != null and !addressDetail.equals("")'>
+          ,address_detail = #{addressDetail}
+        </if>
+        <if test='zipCode != null and !zipCode.equals("")'>
+          ,zip_code = #{zipCode}
+        </if>
+        <if test='joinDate != null and !joinDate.equals("")'>
+          ,join_date = #{joinDate}
+        </if>
+        <if test='status != null and !status.equals("")'>
+          ,status = #{status}
+        </if>
+		WHERE id = #{id}
+	</update>
+
+  <!-- delete -->
+  <delete id="deleteUserById"
+			parameterType="java.lang.Long">
+		DELETE FROM APP_USER
+		WHERE  id = #{id}		
+	</delete>
+
 </mapper>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yamdeng.learn.spring.mapper.CodeDetailMapper">
+
+  <sql id="select-field">
+		  id AS id /* ID */
+      ,create_user_id AS create_user_id /* 등록자 ID */
+      ,update_user_id AS update_user_id /* 수정자 ID */
+      ,create_date AS create_date /* 등록일 */
+      ,update_date AS update_date /* 수정일 */
+      ,is_delete AS is_delete /* 삭제 여부 */
+      ,name AS name /* 코드명 */
+      ,name_en AS name_en /* 코드영문명 */
+      ,group_code AS group_code /* 그룹코드 */
+      ,code AS code /* 코드 */
+      ,etc AS etc /* 설명 */
+	</sql>
+
+  <!-- select -->
+	<select id="select"
+      parameterType="com.yamdeng.learn.spring.dto.request.CodeDetailRequestDTO"
+			resultType="com.yamdeng.learn.spring.dto.response.CodeDetailDTO">
+		SELECT <include refid="select-field"/>
+		FROM
+			APP_CODE_DETAIL
+		WHERE 1=1
+    <include refid="CommonMapper.common_page_bottom"/>
+	</select>
+
+  <!-- list:totalCount -->
+  <select id="getTotalCount"
+			parameterType="com.yamdeng.learn.spring.dto.request.CodeDetailRequestDTO"
+			resultType="int">
+		SELECT count(*) totalCount
+		FROM   APP_CODE_DETAIL
+		WHERE  1 = 1
+	</select>
+
+	<!-- getDetail -->
+	<select id="getCodeDetailById"
+			parameterType="java.lang.Long"
+			resultType="com.yamdeng.learn.spring.dto.response.CodeDetailDTO">
+		SELECT <include refid="select-field"/>
+		FROM   APP_CODE_DETAIL
+		WHERE  1 = 1
+		and id = #{id}		
+	</select>
+
+	<!-- insert -->
+	<insert id="insertCodeDetail"
+			parameterType="com.yamdeng.learn.spring.dto.response.CodeDetailDTO"
+      keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+      INSERT INTO APP_CODE_DETAIL (
+          name
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,create_user_id
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,update_user_id
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,create_date
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,update_date
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,is_delete
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,name_en
+          </if>
+          <if test='groupCode != null and !groupCode.equals("")'>
+            ,group_code
+          </if>
+          <if test='code != null and !code.equals("")'>
+            ,code
+          </if>
+          <if test='etc != null and !etc.equals("")'>
+            ,etc
+          </if>
+      ) VALUES (
+          #{name}
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,#{createUserId}
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,#{updateUserId}
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,#{createDate}
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,#{updateDate}
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,#{isDelete}
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,#{nameEn}
+          </if>
+          <if test='groupCode != null and !groupCode.equals("")'>
+            ,#{groupCode}
+          </if>
+          <if test='code != null and !code.equals("")'>
+            ,#{code}
+          </if>
+          <if test='etc != null and !etc.equals("")'>
+            ,#{etc}
+          </if>
+      )
+	</insert>
+
+  <!-- update -->
+  <update id="updateCodeDetail"
+    parameterType="com.yamdeng.learn.spring.dto.response.CodeDetailDTO">
+		UPDATE APP_CODE_DETAIL
+		SET
+        update_date = <include refid="CommonMapper.current_date_function"/>
+        <if test='createUserId != null and !createUserId.equals("")'>
+          ,create_user_id = #{createUserId}
+        </if>
+        <if test='updateUserId != null and !updateUserId.equals("")'>
+          ,update_user_id = #{updateUserId}
+        </if>
+        <if test='createDate != null and !createDate.equals("")'>
+          ,create_date = #{createDate}
+        </if>
+        <if test='isDelete != null and !isDelete.equals("")'>
+          ,is_delete = #{isDelete}
+        </if>
+        <if test='name != null and !name.equals("")'>
+          ,name = #{name}
+        </if>
+        <if test='nameEn != null and !nameEn.equals("")'>
+          ,name_en = #{nameEn}
+        </if>
+        <if test='groupCode != null and !groupCode.equals("")'>
+          ,group_code = #{groupCode}
+        </if>
+        <if test='code != null and !code.equals("")'>
+          ,code = #{code}
+        </if>
+        <if test='etc != null and !etc.equals("")'>
+          ,etc = #{etc}
+        </if>
+		WHERE id = #{id}
+	</update>
+
+  <!-- delete -->
+  <delete id="deleteCodeDetailById"
+			parameterType="java.lang.Long">
+		DELETE FROM APP_CODE_DETAIL
+		WHERE  id = #{id}		
+	</delete>
+
+</mapper>

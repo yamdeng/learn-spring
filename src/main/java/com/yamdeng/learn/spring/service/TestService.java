@@ -28,4 +28,8 @@ public class TestService {
         return new PageImpl<>(content, pageable, totalCount);
     }
 
+    public void test() {
+        System.out.println("test");
+    }
+
 }

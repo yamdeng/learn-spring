@@ -1,26 +1,42 @@
 package com.yamdeng.learn.spring.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.PostConstruct;
+import com.yamdeng.learn.spring.dto.request.UserRequestDTO;
+import com.yamdeng.learn.spring.dto.response.UserDTO;
+import com.yamdeng.learn.spring.mapper.UserMapper;
 
 @Service
 public class UserService {    
 
-    private String moduleName = "";
+    @Autowired
+    private UserMapper userMapper;
 
-    @PostConstruct
-    public void init() {
-        System.out.println("UserService PostConstruct init");
-        this.moduleName = "TEST";
+    public List<UserDTO> select(UserRequestDTO userRequestDTO) {
+        return userMapper.select(userRequestDTO);
     }
 
-    public String getName() {
-        return "UserService Autowired";
+    public int getTotalCount(UserRequestDTO userRequestDTO) {
+        return userMapper.getTotalCount(userRequestDTO);
     }
 
-    public String getModuleName() {
-        return this.moduleName;
+    public UserDTO getAirplaneById(Long id) {
+        return userMapper.getUserById(id);
+    }
+
+    public int insertAirplane(UserDTO userDTO) {
+        return userMapper.insertUser(userDTO);
+    }
+
+    public void updateAirplane(UserDTO userDTO) {
+        userMapper.updateUser(userDTO);
+    }
+
+    public void deleteAirplaneById(long id) {
+        userMapper.deleteUserById(id);
     }
 
 }

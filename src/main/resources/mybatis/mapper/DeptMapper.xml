@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yamdeng.learn.spring.mapper.DeptMapper">
+
+  <sql id="select-field">
+		  id AS id /* ID */
+      ,create_user_id AS create_user_id /* 등록자 ID */
+      ,update_user_id AS update_user_id /* 수정자 ID */
+      ,create_date AS create_date /* 등록일 */
+      ,update_date AS update_date /* 수정일 */
+      ,is_delete AS is_delete /* 삭제 여부 */
+      ,name AS name /* 부서명 */
+      ,name_en AS name_en /* 부서영문명 */
+      ,dept_key AS dept_key /* 부서키 */
+      ,dept_upper_key AS dept_upper_key /* 부서상위키 */
+      ,status AS status /* 부서상태 */
+	</sql>
+
+  <!-- select -->
+	<select id="select"
+      parameterType="com.yamdeng.learn.spring.dto.request.DeptRequestDTO"
+			resultType="com.yamdeng.learn.spring.dto.response.DeptDTO">
+		SELECT <include refid="select-field"/>
+		FROM
+			APP_DEPT
+		WHERE 1=1
+    <include refid="CommonMapper.common_page_bottom"/>
+	</select>
+
+  <!-- list:totalCount -->
+  <select id="getTotalCount"
+			parameterType="com.yamdeng.learn.spring.dto.request.DeptRequestDTO"
+			resultType="int">
+		SELECT count(*) totalCount
+		FROM   APP_DEPT
+		WHERE  1 = 1
+	</select>
+
+	<!-- getDetail -->
+	<select id="getDeptById"
+			parameterType="java.lang.Long"
+			resultType="com.yamdeng.learn.spring.dto.response.DeptDTO">
+		SELECT <include refid="select-field"/>
+		FROM   APP_DEPT
+		WHERE  1 = 1
+		and id = #{id}		
+	</select>
+
+	<!-- insert -->
+	<insert id="insertDept"
+			parameterType="com.yamdeng.learn.spring.dto.response.DeptDTO"
+      keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+      INSERT INTO APP_DEPT (
+          name
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,create_user_id
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,update_user_id
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,create_date
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,update_date
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,is_delete
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,name_en
+          </if>
+          <if test='deptKey != null and !deptKey.equals("")'>
+            ,dept_key
+          </if>
+          <if test='deptUpperKey != null and !deptUpperKey.equals("")'>
+            ,dept_upper_key
+          </if>
+          <if test='status != null and !status.equals("")'>
+            ,status
+          </if>
+      ) VALUES (
+          #{name}
+          <if test='createUserId != null and !createUserId.equals("")'>
+            ,#{createUserId}
+          </if>
+          <if test='updateUserId != null and !updateUserId.equals("")'>
+            ,#{updateUserId}
+          </if>
+          <if test='createDate != null and !createDate.equals("")'>
+            ,#{createDate}
+          </if>
+          <if test='updateDate != null and !updateDate.equals("")'>
+            ,#{updateDate}
+          </if>
+          <if test='isDelete != null and !isDelete.equals("")'>
+            ,#{isDelete}
+          </if>
+          <if test='nameEn != null and !nameEn.equals("")'>
+            ,#{nameEn}
+          </if>
+          <if test='deptKey != null and !deptKey.equals("")'>
+            ,#{deptKey}
+          </if>
+          <if test='deptUpperKey != null and !deptUpperKey.equals("")'>
+            ,#{deptUpperKey}
+          </if>
+          <if test='status != null and !status.equals("")'>
+            ,#{status}
+          </if>
+      )
+	</insert>
+
+  <!-- update -->
+  <update id="updateDept"
+    parameterType="com.yamdeng.learn.spring.dto.response.DeptDTO">
+		UPDATE APP_DEPT
+		SET
+        update_date = <include refid="CommonMapper.current_date_function"/>
+        <if test='createUserId != null and !createUserId.equals("")'>
+          ,create_user_id = #{createUserId}
+        </if>
+        <if test='updateUserId != null and !updateUserId.equals("")'>
+          ,update_user_id = #{updateUserId}
+        </if>
+        <if test='createDate != null and !createDate.equals("")'>
+          ,create_date = #{createDate}
+        </if>
+        <if test='isDelete != null and !isDelete.equals("")'>
+          ,is_delete = #{isDelete}
+        </if>
+        <if test='name != null and !name.equals("")'>
+          ,name = #{name}
+        </if>
+        <if test='nameEn != null and !nameEn.equals("")'>
+          ,name_en = #{nameEn}
+        </if>
+        <if test='deptKey != null and !deptKey.equals("")'>
+          ,dept_key = #{deptKey}
+        </if>
+        <if test='deptUpperKey != null and !deptUpperKey.equals("")'>
+          ,dept_upper_key = #{deptUpperKey}
+        </if>
+        <if test='status != null and !status.equals("")'>
+          ,status = #{status}
+        </if>
+		WHERE id = #{id}
+	</update>
+
+  <!-- delete -->
+  <delete id="deleteDeptById"
+			parameterType="java.lang.Long">
+		DELETE FROM APP_DEPT
+		WHERE  id = #{id}		
+	</delete>
+
+</mapper>
