@@ -18,8 +18,8 @@
       ,size AS size /* 크기 */
 	</sql>
 
-  <!-- list:page -->
-	<select id="selectAirplaneListPage"
+  <!-- select -->
+	<select id="select"
       parameterType="com.yamdeng.learn.spring.dto.request.AirplaneRequestDTO"
 			resultType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
 		SELECT <include refid="select-field"/>
@@ -36,15 +36,6 @@
 		SELECT count(*) totalCount
 		FROM   APP_AIRPLANE
 		WHERE  1 = 1
-	</select>
-
-	<!-- list:test -->
-	<select id="selectAirplaneList"
-			resultType="com.yamdeng.learn.spring.dto.response.AirplaneDTO">
-		SELECT <include refid="select-field"/>
-		FROM
-			APP_AIRPLANE
-		WHERE 1=1
 	</select>
 
 	<!-- getDetail -->

@@ -16,7 +16,7 @@ public class AirplaneService {
     private AirplaneMapper airplaneMapper;
 
     public List<AirplaneDTO> select(AirplaneRequestDTO airplaneRequestDTO) {
-        return airplaneMapper.selectAirplaneListPage(airplaneRequestDTO);
+        return airplaneMapper.select(airplaneRequestDTO);
     }
 
     public int getTotalCount(AirplaneRequestDTO airplaneRequestDTO) {

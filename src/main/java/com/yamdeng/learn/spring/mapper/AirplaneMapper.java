@@ -10,11 +10,9 @@ import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
 @Mapper
 public interface AirplaneMapper {
 
-    List<AirplaneDTO> selectAirplaneListPage(AirplaneRequestDTO airplaneRequestDTO);
+    List<AirplaneDTO> select(AirplaneRequestDTO airplaneRequestDTO);
 
     int getTotalCount(AirplaneRequestDTO airplaneRequestDTO);
-
-    List<AirplaneDTO> selectAirplaneList();
 
     AirplaneDTO getAirplaneById(long id);
 
