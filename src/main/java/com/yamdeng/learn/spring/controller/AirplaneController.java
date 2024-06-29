@@ -43,21 +43,24 @@ public class AirplaneController {
     }
 
     @PostMapping("")
-    public CommonResponseDTO<Integer> create(@RequestBody AirplaneDTO airplaneDTO) {
-        int newId = airplaneService.insertAirplane(airplaneDTO);
-        return CommonResponseDTO.<Integer>builder().data(newId).build();
+    public CommonResponseDTO<AirplaneDTO> create(@RequestBody AirplaneDTO airplaneDTO) {
+        airplaneService.insertAirplane(airplaneDTO);
+        AirplaneDTO createdEntity = airplaneService.getAirplaneById(airplaneDTO.getId());
+        return CommonResponseDTO.<AirplaneDTO>builder().data(createdEntity).build();
     }
 
     @PutMapping("{id}")
-    public CommonResponseDTO<?> update(@PathVariable Long id, @RequestBody AirplaneDTO airplaneDTO) {
+    public CommonResponseDTO<AirplaneDTO> update(@PathVariable("id") Long id, @RequestBody AirplaneDTO airplaneDTO) {
         airplaneDTO.setId(id);
         airplaneService.updateAirplane(airplaneDTO);
-        return CommonResponseDTO.getDefaultResponse();
+        AirplaneDTO updatedEntity = airplaneService.getAirplaneById(id);
+        return CommonResponseDTO.<AirplaneDTO>builder().data(updatedEntity).build();
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    public CommonResponseDTO<?> delete(@PathVariable Long id) {
         airplaneService.deleteAirplaneById(id);
+        return CommonResponseDTO.getDefaultResponse();
     }
 
 }

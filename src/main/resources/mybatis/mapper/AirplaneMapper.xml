@@ -22,8 +22,7 @@
 		FROM
 			APP_AIRPLANE
 		WHERE 1=1
-    and name = 'aaa22'
-    offset #{offset} limit #{pageSize}
+    <include refid="com.yamdeng.learn.spring.mapper.CommonMapper.common_page_bottom"/>
 	</select>
 
   <select id="getTotalCount"
@@ -71,8 +70,9 @@
       keyColumn="id" keyProperty="id" useGeneratedKeys="true">
 		
         INSERT INTO APP_AIRPLANE (
+            name
             <if test='createUserId != null and !createUserId.equals("")'>
-              create_user_id
+              ,create_user_id
             </if>
             <if test='updateUserId != null and !updateUserId.equals("")'>
               ,update_user_id
@@ -85,9 +85,6 @@
             </if>
             <if test='isDelete != null and !isDelete.equals("")'>
               ,is_delete
-            </if>
-            <if test='name != null and !name.equals("")'>
-              ,name
             </if>
             <if test='nameEn != null and !nameEn.equals("")'>
               ,name_en
@@ -108,8 +105,9 @@
               ,size
             </if>
         ) VALUES (
+            #{name}
             <if test='createUserId != null and !createUserId.equals("")'>
-              #{createUserId}
+              ,#{createUserId}
             </if>
             <if test='updateUserId != null and !updateUserId.equals("")'>
               ,#{updateUserId}
@@ -122,9 +120,6 @@
             </if>
             <if test='isDelete != null and !isDelete.equals("")'>
               ,#{isDelete}
-            </if>
-            <if test='name != null and !name.equals("")'>
-              ,#{name}
             </if>
             <if test='nameEn != null and !nameEn.equals("")'>
               ,#{nameEn}
