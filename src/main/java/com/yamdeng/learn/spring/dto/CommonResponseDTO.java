@@ -1,8 +1,5 @@
 package com.yamdeng.learn.spring.dto;
 
-import java.util.Collections;
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
@@ -11,9 +8,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 public class CommonResponseDTO<T> {
 
-    @Builder.Default
-    private List<T> list = Collections.emptyList();
-
     private int totalCount;
     private T data;
 
@@ -21,5 +15,10 @@ public class CommonResponseDTO<T> {
     private boolean success = true;
 
     private String errorMessage;
+    private String responseCode;
+
+    public static CommonResponseDTO<?> getDefaultResponse() {
+        return CommonResponseDTO.builder().build();
+    }
 
 }

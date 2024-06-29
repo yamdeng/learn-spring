@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yamdeng.learn.spring.constant.ApiConstant;
+import com.yamdeng.learn.spring.dto.CommonResponseDTO;
 import com.yamdeng.learn.spring.dto.request.AirplaneRequestDTO;
 import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
 import com.yamdeng.learn.spring.service.AirplaneService;
@@ -25,24 +26,33 @@ public class AirplaneController {
     private AirplaneService airplaneService;
 
     @GetMapping("")
-    public List<AirplaneDTO> selectList(AirplaneRequestDTO airplaneRequestDTO) {
-        return airplaneService.selectAirplaneListPage(airplaneRequestDTO);
+    public CommonResponseDTO<List<AirplaneDTO>> selectListPage(AirplaneRequestDTO airplaneRequestDTO) {
+        List<AirplaneDTO> list = airplaneService.selectAirplaneListPage(airplaneRequestDTO);
+        int totalCount = airplaneService.getTotalCount(airplaneRequestDTO);
+        return CommonResponseDTO.<List<AirplaneDTO>>builder()
+                            .data(list)
+                            .totalCount(totalCount)
+                            .build();
     }
 
     @GetMapping("{id}")
-    public AirplaneDTO getDetail(@PathVariable("id") Long id) {
-        return airplaneService.getAirplaneById(id);
+    public CommonResponseDTO<AirplaneDTO> getDetail(@PathVariable("id") Long id) {
+        return CommonResponseDTO.<AirplaneDTO>builder()
+                            .data(airplaneService.getAirplaneById(id))
+                            .build();
     }
 
     @PostMapping("")
-    public void create(@RequestBody AirplaneDTO airplaneDTO) {
-        airplaneService.insertAirplane(airplaneDTO);
+    public CommonResponseDTO<Integer> create(@RequestBody AirplaneDTO airplaneDTO) {
+        int newId = airplaneService.insertAirplane(airplaneDTO);
+        return CommonResponseDTO.<Integer>builder().data(newId).build();
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable Long id, @RequestBody AirplaneDTO airplaneDTO) {
+    public CommonResponseDTO<?> update(@PathVariable Long id, @RequestBody AirplaneDTO airplaneDTO) {
         airplaneDTO.setId(id);
         airplaneService.updateAirplane(airplaneDTO);
+        return CommonResponseDTO.getDefaultResponse();
     }
 
     @DeleteMapping("{id}")

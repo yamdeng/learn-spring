@@ -15,20 +15,24 @@ public class AirplaneService {
     @Autowired
     private AirplaneMapper airplaneMapper;
 
-    public List<AirplaneDTO> selectAirplaneList() {
-        return airplaneMapper.selectAirplaneList();
-    }
-
     public List<AirplaneDTO> selectAirplaneListPage(AirplaneRequestDTO airplaneRequestDTO) {
         return airplaneMapper.selectAirplaneListPage(airplaneRequestDTO);
+    }
+
+    public int getTotalCount(AirplaneRequestDTO airplaneRequestDTO) {
+        return airplaneMapper.getTotalCount(airplaneRequestDTO);
+    }
+
+    public List<AirplaneDTO> selectAirplaneList() {
+        return airplaneMapper.selectAirplaneList();
     }
 
     public AirplaneDTO getAirplaneById(Long id) {
         return airplaneMapper.getAirplaneById(id);
     }
 
-    public void insertAirplane(AirplaneDTO airplaneDTO) {
-        airplaneMapper.insertAirplane(airplaneDTO);
+    public int insertAirplane(AirplaneDTO airplaneDTO) {
+        return airplaneMapper.insertAirplane(airplaneDTO);
     }
 
     public void updateAirplane(AirplaneDTO airplaneDTO) {

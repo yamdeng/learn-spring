@@ -10,13 +10,15 @@ import com.yamdeng.learn.spring.dto.response.AirplaneDTO;
 @Mapper
 public interface AirplaneMapper {
 
-    List<AirplaneDTO> selectAirplaneList();
-
     List<AirplaneDTO> selectAirplaneListPage(AirplaneRequestDTO airplaneRequestDTO);
+
+    int getTotalCount(AirplaneRequestDTO airplaneRequestDTO);
+
+    List<AirplaneDTO> selectAirplaneList();
 
     AirplaneDTO getAirplaneById(long id);
 
-    void insertAirplane(AirplaneDTO airplaneDTO);
+    int insertAirplane(AirplaneDTO airplaneDTO);
 
     void updateAirplane(AirplaneDTO airplaneDTO);
 

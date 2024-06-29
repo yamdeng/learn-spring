@@ -13,6 +13,8 @@ import lombok.experimental.SuperBuilder;
 public class CommonRequestDTO {
 
     @Builder.Default
+    private int offset = 0;
+    @Builder.Default
     private int pageSize = 10;
     @Builder.Default
     private int currentPage = 1;
