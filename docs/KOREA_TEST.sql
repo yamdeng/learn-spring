@@ -87,6 +87,7 @@ comment on column APP_USER.CREATE_DATE is '등록일';
 comment on column APP_USER.UPDATE_DATE is '수정일';
 comment on column APP_USER.IS_DELETE is '삭제 여부';
 
+comment on column APP_USER.LOGIN_ID is '로그인ID';
 comment on column APP_USER.NAME is '이름';
 comment on column APP_USER.NAME_EN is '이름영문명';
 comment on column APP_USER.SABUN is '사번';
