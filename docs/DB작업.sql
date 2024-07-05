@@ -277,13 +277,19 @@ FROM information_schema.columns a
 WHERE a.table_name = lower('app_user')
 order by a.ordinal_position) As data_type_comment;
 
--- swagger description 추출
+-- swagger description + validation dto 추출
 SELECT concat(
 	'@Schema(description = "', '', COLUMN_COMMENT, '"', ')'
-	) as java_swagger_description, concat(
+	) as java_swagger_description,
+	CASE WHEN is_nullable in('NO') THEN '@NotEmpty'
+            ELSE
+             	''
+            END AS java_validation,
+	concat(
 	'private ', java_type, ' ', (lower(substring(pascal_case,1,1)) || substring(pascal_case,2)), ';',
 	' /* ', COLUMN_COMMENT, ' */'
 	) as java_vo_string
+	,chr(10)
 FROM (
 SELECT a.column_name
 	,replace(initcap(replace(a.column_name, '_', ' ')), ' ', '') As pascal_case
@@ -297,6 +303,7 @@ SELECT a.column_name
              	''
             END AS java_type
 	,b.COLUMN_COMMENT
+	,a.is_nullable 
 FROM information_schema.columns a
 	inner join (
 		SELECT
