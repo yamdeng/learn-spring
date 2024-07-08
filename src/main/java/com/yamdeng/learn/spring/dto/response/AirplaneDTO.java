@@ -44,4 +44,7 @@ public class AirplaneDTO extends BaseDTO {
     @Schema(description = "크기")
     private Double size; /* 크기 */
 
+    @Schema(description = "항공편 정보 목록")
+    private List<FlightDTO> flightList; /* 항공편 정보 목록 */
+
 }
