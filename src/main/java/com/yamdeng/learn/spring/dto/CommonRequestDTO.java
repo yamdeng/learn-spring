@@ -15,7 +15,7 @@ public class CommonRequestDTO {
     @Builder.Default
     private int offset = 0;
     @Builder.Default
-    private int pageSize = 10;
+    private int pageSize = 100000;
     @Builder.Default
     private int currentPage = 1;
     private String sortName;
