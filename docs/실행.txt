@@ -1,0 +1,6 @@
+./gradlew :module-adminbe:bootRun
+./gradlew :module-ksmsbe:bootRun
+
+
+./gradlew :module-admin:bootRun --args='--spring.profiles.active=local'
+./gradlew :module-ksmsbe:bootRun --args='--spring.profiles.active=local'

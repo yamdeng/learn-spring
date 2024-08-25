@@ -1,0 +1,58 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 1000MB
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 83505269
+server:
+  port: 8083
+  servlet:
+    context-path: /
+    session:
+      timeout: 3600
+logging:
+  level:
+    root: DEBUG
+mybatis:
+  config-location: classpath:/config_mybatis.xml
+  mapper-locations: classpath:/mapper/**/*.xml
+autoconfigure:
+  exclude:
+    - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+    - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+springdoc:
+  version: "@project.version"
+  api-docs:
+    path: /api-docs
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    display-query-params-without-oauth2: true
+    doc-expansion: none
+pagehelper:
+  helper-dialect: postgresql
+  reasonable: true
+aws:
+  s3:
+    rootPath: /Users/yongsungahn/Project/upload
+jwt:
+  accessToken:
+    expiration_time: 600 #10분
+  refreshToken:
+    expiration_time: 86400 #1일
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
