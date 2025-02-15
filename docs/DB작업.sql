@@ -366,3 +366,153 @@ FROM information_schema.columns a
 			on a.column_name = b.column_name
 WHERE a.table_name = lower('app_airplane')
 order by a.ordinal_position) As data_type_comment;
+
+-- 테이블명, 테이블주석 조회 : 2025-02-11 추가
+select upper(table_name), obj_description(oid) AS table_comment
+from information_schema.tables a inner join pg_class b on a.table_name = b.relname
+where table_catalog = 'obiswork' and table_schema = 'public'
+and table_name like 'tas%';
+
+-- 2025-02-14 sql 고도화
+SELECT 
+    UPPER(a.table_name) AS table_name,
+    UPPER(a.column_name) AS column_name,
+    COALESCE(b.column_comment, '') AS column_comment,
+    CASE WHEN a.data_type in('character varying') THEN 'VARCHAR'
+    WHEN a.data_type in('character') THEN 'CHAR'
+			WHEN a.data_type in('timestamp without time zone', 'timestamp') THEN 'TIMESTAMP'
+			WHEN data_type in('numeric') THEN 'NUMERIC'
+			WHEN data_type in('integer') THEN 'INTEGER'
+			WHEN data_type in('boolean') THEN 'BOOLEAN'
+			WHEN data_type in('date') THEN 'DATE'
+            ELSE
+             	''
+            END AS column_type,
+    character_maximum_length as column_size,
+    CASE WHEN a.is_nullable in('NO') THEN 'N'
+            ELSE
+             	'Y'
+            END as null허용,
+   CASE 
+        WHEN (
+            SELECT COUNT(*)
+            FROM information_schema.key_column_usage usag_cols
+            WHERE usag_cols.table_name = a.table_name 
+              AND usag_cols.column_name = a.column_name 
+              AND usag_cols.constraint_name LIKE '%_pk'
+        ) > 0 THEN 'Y'
+        ELSE 'N'
+    END AS is_primary_key
+FROM information_schema.columns a
+LEFT JOIN (
+    SELECT 
+        ps.relname AS table_name,
+        pa.attname AS column_name,
+        pd.description AS column_comment
+    FROM pg_stat_all_tables ps
+    LEFT JOIN pg_description pd 
+        ON ps.relid = pd.objoid 
+        AND pd.objsubid <> 0
+    LEFT JOIN pg_attribute pa 
+        ON pd.objoid = pa.attrelid 
+        AND pd.objsubid = pa.attnum
+    WHERE ps.relname = LOWER('TAS_A_DOC_H_MANAGE')
+) b 
+ON a.column_name = b.column_name
+AND a.table_name = b.table_name
+WHERE a.table_name = LOWER('TAS_A_DOC_H_MANAGE')
+ORDER BY a.ordinal_position;
+
+-- column 정보와 size를 한까번에 표기 2025-02-14 추가
+-- 테이블명, 컬럼명, 컬럼설명 컬럼타입, PK여부, 널허용
+
+SELECT 
+    UPPER(a.table_name) AS table_name,
+    UPPER(a.column_name) AS column_name,
+    COALESCE(b.column_comment, '') AS column_comment,
+    CASE WHEN a.data_type in('character varying') THEN concat('VARCHAR(', character_maximum_length, ')')
+    WHEN a.data_type in('character') THEN concat('CHAR(', character_maximum_length, ')')
+			WHEN a.data_type in('timestamp without time zone', 'timestamp') THEN 'TIMESTAMP'
+			WHEN data_type in('numeric') THEN 'NUMERIC'
+			WHEN data_type in('integer') THEN 'INTEGER'
+			WHEN data_type in('boolean') THEN 'BOOLEAN'
+			WHEN data_type in('date') THEN 'DATE'
+            ELSE
+             	upper(a.data_type)
+            END AS column_type,
+    CASE WHEN a.is_nullable in('NO') THEN 'N'
+            ELSE
+             	'Y'
+            END as null허용,
+   CASE 
+        WHEN (
+            SELECT COUNT(*)
+            FROM information_schema.key_column_usage usag_cols
+            WHERE usag_cols.table_name = a.table_name 
+              AND usag_cols.column_name = a.column_name 
+              AND usag_cols.constraint_name LIKE '%_pk'
+        ) > 0 THEN 'Y'
+        ELSE 'N'
+    END AS is_primary_key
+FROM information_schema.columns a
+LEFT JOIN (
+    SELECT 
+        ps.relname AS table_name,
+        pa.attname AS column_name,
+        pd.description AS column_comment
+    FROM pg_stat_all_tables ps
+    LEFT JOIN pg_description pd 
+        ON ps.relid = pd.objoid 
+        AND pd.objsubid <> 0
+    LEFT JOIN pg_attribute pa 
+        ON pd.objoid = pa.attrelid 
+        AND pd.objsubid = pa.attnum
+    WHERE ps.relname = LOWER('TAS_A_DOC')
+) b 
+ON a.column_name = b.column_name
+AND a.table_name = b.table_name
+WHERE a.table_name = LOWER('TAS_A_DOC')
+ORDER BY a.ordinal_position;
+
+-- java vo 멤버변수 반영 2025-02-15 추가 : TODO(swagger 반영 필요)
+
+select concat(
+	'private ', java_type, ' ', (lower(substring(pascal_case,1,1)) || substring(pascal_case,2)), ';',
+	' /* ', COLUMN_COMMENT, ' */'
+	) as java_vo_string
+	from (
+	SELECT 
+    CASE WHEN a.data_type in('character', 'character varying') THEN 'String'
+			WHEN a.data_type in('timestamp without time zone', 'timestamp') THEN 'LocalDateTime'
+			WHEN a.data_type in('numeric') THEN 'Double'
+			WHEN a.data_type in('integer') THEN 'Long'
+			WHEN a.data_type in('boolean') THEN 'Boolean'
+			WHEN a.data_type in('date') THEN 'LocalDate'
+			WHEN a.data_type in('text') THEN 'String'
+			WHEN a.data_type in('bytea') THEN 'byte[]'
+            ELSE
+             	a.data_type || 'ssxx' 
+            END AS java_type, a.column_name,
+            a.column_name
+	,replace(initcap(replace(a.column_name, '_', ' ')), ' ', '') As pascal_case
+	,b.COLUMN_COMMENT
+FROM information_schema.columns a
+LEFT JOIN (
+    SELECT 
+        ps.relname AS table_name,
+        pa.attname AS column_name,
+        pd.description AS column_comment
+    FROM pg_stat_all_tables ps
+    LEFT JOIN pg_description pd 
+        ON ps.relid = pd.objoid 
+        AND pd.objsubid <> 0
+    LEFT JOIN pg_attribute pa 
+        ON pd.objoid = pa.attrelid 
+        AND pd.objsubid = pa.attnum
+    WHERE ps.relname = LOWER('TAS_A_DOC')
+) b 
+ON a.column_name = b.column_name
+AND a.table_name = b.table_name
+WHERE a.table_name = LOWER('TAS_A_DOC')
+ORDER BY a.ordinal_position
+	) as full_vo_table
