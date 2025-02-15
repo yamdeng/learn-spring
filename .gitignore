@@ -38,3 +38,5 @@ out/
 .history/
 
 logs/
+
+.DS_Store
